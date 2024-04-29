@@ -28,18 +28,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `client` (
-  `ID-Client` int(50) NOT NULL,
-  `Nom-Client` varchar(50) NOT NULL,
-  `Prénom-Client` varchar(50) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `Télephone` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `tel` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`ID-Client`, `Nom-Client`, `Prénom-Client`, `Email`, `Télephone`) VALUES
+INSERT INTO `client` (`id`, `nom`, `prenom`, `email`, `tel`) VALUES
 (1, 'NGODJOU ', 'HUGUES', 'HUGUES@gmail.com', 77083236),
 (2, 'ESSONO ', 'ROBY', 'ROBY@gmail.com', 74755509),
 (3, 'DJEMBA ', 'SAMUEL', 'SAMUEL@gmail.com', 66554433),
@@ -57,22 +57,22 @@ INSERT INTO `client` (`ID-Client`, `Nom-Client`, `Prénom-Client`, `Email`, `Té
 -- Structure de la table `employer`
 --
 
-CREATE TABLE `employer` (
-  `Matricule-emp` int(50) NOT NULL,
-  `Nom-emp` varchar(50) NOT NULL,
-  `Prénom-emp` varchar(50) NOT NULL,
-  `Date-naiss` date NOT NULL,
-  `Date-emb` date NOT NULL,
-  `Service` varchar(50) NOT NULL,
-  `Tel` int(50) NOT NULL,
-  `Email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `employee` (
+  `matricule` int(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `date_naiss` date NOT NULL,
+  `date_emb` date NOT NULL,
+  `service` varchar(50) NOT NULL,
+  `tel` int(50) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `employer`
 --
 
-INSERT INTO `employer` (`Matricule-emp`, `Nom-emp`, `Prénom-emp`, `Date-naiss`, `Date-emb`, `Service`, `Tel`, `Email`) VALUES
+INSERT INTO `employee` (`matricule`, `nom`, `prenom`, `date_naiss`, `date_emb`, `service`, `tel`, `email`) VALUES
 (1, 'ASSITA', 'SEONE', '2005-04-08', '2022-04-08', 'Directeur du marketing', 74874911, 'SEONE@gmail.com'),
 (2, 'NYENGUE WOMDO ', 'LEOTARD', '1972-04-07', '2015-04-16', 'Directeur financier', 62445520, 'WOMDO@gmail.com '),
 (3, 'MANDOUKOU', 'JORDY', '1997-04-03', '2014-04-01', 'Directeur des ventes', 74164874, 'MANDOUKOU@gmail.com'),
@@ -87,33 +87,6 @@ INSERT INTO `employer` (`Matricule-emp`, `Nom-emp`, `Prénom-emp`, `Date-naiss`,
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `stockage`
---
-
-CREATE TABLE `stockage` (
-  `ID-stock` int(50) NOT NULL,
-  `nombre-Voiture` int(50) NOT NULL,
-  `modèle-Voiture` varchar(50) NOT NULL,
-  `Statut` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `stockage`
---
-
-INSERT INTO `stockage` (`ID-stock`, `nombre-Voiture`, `modèle-Voiture`, `Statut`) VALUES
-(1, 4, 'BMW', 'Réserver '),
-(2, 4, 'Bugatti', 'Disponible'),
-(3, 2, 'Chevrolet', 'Réserver '),
-(4, 3, 'Citroën', 'Disponible'),
-(5, 5, 'Corvette', 'Réserver '),
-(6, 6, 'Fiat', 'Réserver '),
-(7, 1, 'Ford', 'Disponible'),
-(8, 8, 'Hummer', 'Réserver '),
-(9, 5, 'Hyundai', 'Réserver '),
-(10, 6, 'Jeep', 'Disponible');
-
 -- --------------------------------------------------------
 
 --
@@ -121,17 +94,17 @@ INSERT INTO `stockage` (`ID-stock`, `nombre-Voiture`, `modèle-Voiture`, `Statut
 --
 
 CREATE TABLE `vente` (
-  `ID-vente` int(30) NOT NULL,
-  `Date-vente` date NOT NULL,
-  `Modale-pay` varchar(50) NOT NULL,
-  `Montant-vente` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(30) NOT NULL,
+  `date` date NOT NULL,
+  `modale_pay` varchar(50) NOT NULL,
+  `montant` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `vente`
 --
 
-INSERT INTO `vente` (`ID-vente`, `Date-vente`, `Modale-pay`, `Montant-vente`) VALUES
+INSERT INTO `vente` (`id`, `date`, `modale_pay`, `montant`) VALUES
 (1, '2024-04-10', 'Carte', 8000000),
 (2, '2016-03-09', 'Cash', 5000000),
 (3, '2015-04-22', 'Cheque ', 15000000),
@@ -150,22 +123,24 @@ INSERT INTO `vente` (`ID-vente`, `Date-vente`, `Modale-pay`, `Montant-vente`) VA
 --
 
 CREATE TABLE `voiture` (
-  `ID-Voiture` int(30) NOT NULL,
-  `Marque-Voiture` varchar(50) NOT NULL,
-  `Modèle-Voiture` varchar(50) NOT NULL,
-  `Année-fabrication` date NOT NULL,
-  `Kilométrage` int(50) NOT NULL,
-  `Prix` int(10) NOT NULL,
-  `Couleur` varchar(30) NOT NULL,
-  `Etat` varchar(20) NOT NULL,
-  `Type-carburant` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(30) NOT NULL,
+  `marque` varchar(50) NOT NULL,
+  `modele` varchar(50) NOT NULL,
+  `annee_fabrication` date NOT NULL,
+  `kilometrage` int(50) NOT NULL,
+  `prix` int(10) NOT NULL,
+  `couleur` varchar(30) NOT NULL,
+  `etat` varchar(20) NOT NULL,
+  `type_carburant` varchar(50) NOT NULL,
+  `quantite` int(5) NOT NULL DEFAULT 1,
+  `statut` VARCHAR(50) NOT NULL DEFAULT 'Disponible'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `voiture`
 --
 
-INSERT INTO `voiture` (`ID-Voiture`, `Marque-Voiture`, `Modèle-Voiture`, `Année-fabrication`, `Kilométrage`, `Prix`, `Couleur`, `Etat`, `Type-carburant`) VALUES
+INSERT INTO `voiture` (`id`, `marque`, `modele`, `annee_fabrication`, `kilometrage`, `prix`, `couleur`, `etat`, `type_carburant`) VALUES
 (1, 'Toyota', 'Camry', '2019-04-03', 25000, 5000000, 'Rouge, Noir ', ' Neuve ', 'Essence'),
 (2, 'Toyota', 'Corolla', '2018-04-01', 30000, 7000000, 'Rouge, Noir ', 'Occasion ', 'Essence'),
 (3, 'BMW', '5séries', '2020-04-01', 15000, 6000000, 'Rouge, Noir , Bleu , Blanc', 'Occasion ', 'Essence'),
@@ -185,31 +160,25 @@ INSERT INTO `voiture` (`ID-Voiture`, `Marque-Voiture`, `Modèle-Voiture`, `Anné
 -- Index pour la table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`ID-Client`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `employer`
 --
-ALTER TABLE `employer`
-  ADD PRIMARY KEY (`Matricule-emp`);
-
---
--- Index pour la table `stockage`
---
-ALTER TABLE `stockage`
-  ADD PRIMARY KEY (`ID-stock`);
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`matricule`);
 
 --
 -- Index pour la table `vente`
 --
 ALTER TABLE `vente`
-  ADD PRIMARY KEY (`ID-vente`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `voiture`
 --
 ALTER TABLE `voiture`
-  ADD PRIMARY KEY (`ID-Voiture`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -219,31 +188,25 @@ ALTER TABLE `voiture`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID-Client` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `employer`
 --
-ALTER TABLE `employer`
-  MODIFY `Matricule-emp` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT pour la table `stockage`
---
-ALTER TABLE `stockage`
-  MODIFY `ID-stock` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `employee`
+  MODIFY `matricule` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `vente`
 --
 ALTER TABLE `vente`
-  MODIFY `ID-vente` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `voiture`
 --
 ALTER TABLE `voiture`
-  MODIFY `ID-Voiture` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
