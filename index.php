@@ -1,19 +1,52 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Gestion Vente Voitures </title>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script> -->
     <!-- <link rel="stylesheet" href="lib/font-awesome.min.css"/> -->
     <!-- <link rel="stylesheet" href="lib/w3-theme-teal.css"/> -->
     <!-- <link rel="stylesheet" href="lib/w3-4.0.css"/> -->
-    <!-- <link rel="stylesheet" href="view/css/site.css"/> -->
-    <style>
-        html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-    </style>
+    <link rel="stylesheet" href="css/app.css"/>
 </head>
 
 <body>
+    <nav class="app-bar">
+        <a class="active" href="#home">Tableau de bord</a>
+        <a href="pages/voiture.php">Voitures</a>
+        <a href="pages/ventes.php">Ventes</a>
+        <a href="pages/clients.php">Clients</a>
+        <a href="pages/employes.php">Employés</a>
+    </nav>
+
+    <div class="content">
+        <div class="flex justify-space-between">
+            <div class="stat-card">
+                <h3 class="title">Nombre de voitures</h3>
+                <span class="number">22</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="title">Nombre de clients</h3>
+                <span class="number">12</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="title">Nombre d'employés</h3>
+                <span class="number">5</span>
+            </div>
+
+            <div class="stat-card">
+                <h3 class="title">Nombre de ventes</h3>
+                <span class="number">8</span>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer></footer>
 
 </body>
+
 </html>
