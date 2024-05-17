@@ -11,9 +11,9 @@
 
   <?php
   $pdo = require '../../controllers/Connect.php';
-  require '../../controllers/VenteRepository.php';
+  require '../../controllers/ClientRepository.php';
 
-  $repository = new VenteRepository($pdo);
+  $repository = new ClientRepository($pdo);
 
   if (!isset($_GET['search'])) {
     $objects = $repository->getAll('');
@@ -36,39 +36,38 @@
   <nav class="app-bar">
     <a href="../../">Tableau de bord</a>
     <a href="../voitures">Voitures</a>
-    <a href="#" class="active">Ventes</a>
-    <a href="../clients">Clients</a>
+    <a href="../ventes">Ventes</a>
+    <a href="#" class="active">Clients</a>
     <a href="../employes">Employés</a>
   </nav>
 
   <div class="content">
     <div class="flex justify-space-between items-center">
-      <h1 class="inline-flex">Liste des ventes</h1>
+      <h1 class="inline-flex">Liste des clients</h1>
       <div class="toolbar flex items-center">
-      <form action="" method="get" class="flex gap-none" style="margin-right: 16px">
+        <form action="" method="get" class="flex gap-none" style="margin-right: 16px">
           <?php
           $search = '';
           if (isset($_GET['search'])) {
             $search = $_GET['search'];
           }
           echo <<<EOF
-                  <input name="search" type="text" placeholder="Client ou voiture ..." value="$search"> 
+                  <input name="search" type="text" placeholder="Nom ou prénom ..." value="$search"> 
                 EOF;
           ?>
           <button type="submit" class="btn default"><i class="fa-solid fa-magnifying-glass"></i> </button>
         </form>
-        <a href="create.php" class="btn primary">Nouvelle Vente</a>
+        <a href="create.php" class="btn primary">Nouveau Client</a>
       </div>
     </div>
 
     <div style="overflow-x: auto; margin-top: 1rem;">
       <table>
         <tr>
-          <th>Date</th>
-          <th>Client</th>
-          <th>Voiture</th>
-          <th>Montant (F)</th>
-          <th>Modalité de paiement</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
           <th>Actions</th>
         </tr>
         <?php
@@ -76,11 +75,10 @@
           foreach ($objects as $object) {
             echo <<<HTML
               <tr>
-                <td>{$object['date']}</td>
-                <td>{$object['client']}</td>
-                <td>{$object['voiture']}</td>
-                <td>{$object['montant']}</td>
-                <td>{$object['modale_pay']}</td>
+                <td>{$object['nom']}</td>
+                <td>{$object['prenom']}</td>
+                <td>{$object['email']}</td>
+                <td>{$object['tel']}</td>
                 <td style="width: 6rem ">
                   <div class="flex justify-end gap-3" style="margin-top: 12px;">
                     <a href="update.php?id={$object['id']}" class="btn outlined info" style="padding: 10px 12px"><i class="inline-flex fa-solid fa-pencil"></i></a>
@@ -101,7 +99,6 @@
 
 
   <footer></footer>
-
 
   <script>
     function deleteObject(id) {

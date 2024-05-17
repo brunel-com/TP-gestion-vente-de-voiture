@@ -14,9 +14,9 @@
 
   <?php
   $pdo = require '../../controllers/Connect.php';
-  require '../../controllers/VoitureController.php';
+  require '../../controllers/VoitureRepository.php';
 
-  $controller = new CarController($pdo);
+  $repository = new CarRepository($pdo);
 
   if (isset($_POST['new-car'])) {
     $car = [];
@@ -31,38 +31,26 @@
     $car['statut'] = $_POST['statut'];
     $car['quantite'] = $_POST['quantite'];
 
-    $controller->executeStore($car);
+    $repository->create($car);
 
-    header('Location: ../');
+    header('Location: ./');
   }
   ?>
 </head>
 
 <body>
   <nav class="app-bar">
-    <a href="/index.php">Tableau de bord</a>
-    <a href="voitures">Voitures</a>
-    <a href="../ventes.php">Ventes</a>
-    <a href="../clients.php">Clients</a>
-    <a href="../employes.php">Employés</a>
+    <a href="../../">Tableau de bord</a>
+    <a href="../voitures">Voitures</a>
+    <a href="../ventes">Ventes</a>
+    <a href="../clients">Clients</a>
+    <a href="../employes">Employés</a>
   </nav>
 
   <div class="content">
         <div class="flex justify-space-between items-center">
           <h1 class="inline-flex">Nouvelle voiture</h1>
           <div class="toolbar flex items-center">
-            <!-- <form action="" method="get" class="flex gap-none" style="margin-right: 16px">
-              <?php 
-                /* $search = '';
-                if (isset($_GET['search'])) {
-                  $search = $_GET['search'];
-                }
-                echo <<<EOF
-                  <input name="search" type="text" placeholder="Marque ou modèle ..." value="$search"> 
-                EOF;  */
-              ?>
-              <button type="submit" class="btn default"><i class="fa-solid fa-magnifying-glass"></i> </button>
-            </form> -->
             <a href="./" class="btn outlined primary"><i class="fa-solid fa-caret-left"></i> Liste de voitures</a>
           </div>
         </div>

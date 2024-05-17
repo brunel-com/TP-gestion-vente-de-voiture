@@ -14,10 +14,10 @@
 <body>
     <nav class="app-bar">
         <a class="active" href="#home">Tableau de bord</a>
-        <a href="pages/voiture.php">Voitures</a>
-        <a href="pages/ventes.php">Ventes</a>
-        <a href="pages/clients.php">Clients</a>
-        <a href="pages/employes.php">Employés</a>
+        <a href="pages/voitures">Voitures</a>
+        <a href="pages/ventes">Ventes</a>
+        <a href="pages/clients">Clients</a>
+        <a href="pages/employes">Employés</a>
     </nav>
 
     <div class="content">

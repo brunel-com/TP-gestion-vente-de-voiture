@@ -4,29 +4,30 @@
 <head>
   <title>Gestion Vente Voitures </title>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script> -->
   <link rel="stylesheet" href="../../lib/fontawesome/css/fontawesome.css" />
   <link rel="stylesheet" href="../../lib/fontawesome/css/regular.css" />
   <link rel="stylesheet" href="../../lib/fontawesome/css/solid.css" />
-  <!-- <link rel="stylesheet" href="lib/w3-theme-teal.css"/> -->
-  <!-- <link rel="stylesheet" href="lib/w3-4.0.css"/> -->
   <link rel="stylesheet" href="../../css/app.css" />
 
   <?php
   $pdo = require '../../controllers/Connect.php';
-  require '../../controllers/VoitureController.php';
+  require '../../controllers/VoitureRepository.php';
 
-  $controller = new CarController($pdo);
-  $car = $controller->executeGet($_GET['id']);
+  $repository = new CarRepository($pdo);
+  if (!isset($_GET['id'])) {
+    die('ERREUR - Aucun ID renseigné dans l\'url');
+  }
+  $car = $repository->get($_GET['id']);
 
   $isSelectedOption = function($condition) {
     if ($condition) {
-      echo "selected";
+      return "selected";
     }
   };
 
   if (isset($_POST['update-car'])) {
     $updated_car = [];
+    $updated_car['id'] = $_GET['id'];
     $updated_car['marque'] = $_POST['marque'];
     $updated_car['modele'] = $_POST['modele'];
     $updated_car['prix'] = $_POST['prix'];
@@ -38,25 +39,25 @@
     $updated_car['statut'] = $_POST['statut'];
     $updated_car['quantite'] = $_POST['quantite'];
 
-    $controller->executeStore($updated_car);
+    $repository->update($updated_car);
 
-    header('Location: ../');
+    header('Location: ./index.php');
   }
   ?>
 </head>
 
 <body>
   <nav class="app-bar">
-    <a href="/index.php">Tableau de bord</a>
-    <a href="voitures">Voitures</a>
-    <a href="../ventes.php">Ventes</a>
-    <a href="../clients.php">Clients</a>
-    <a href="../employes.php">Employés</a>
+    <a href="../../">Tableau de bord</a>
+    <a href="../voitures">Voitures</a>
+    <a href="../ventes">Ventes</a>
+    <a href="../clients">Clients</a>
+    <a href="../employes">Employés</a>
   </nav>
 
   <div class="content">
         <div class="flex justify-space-between items-center">
-          <h1 class="inline-flex">Nouvelle voiture</h1>
+          <h1 class="inline-flex">Éditer voiture</h1>
           <div class="toolbar flex items-center">
             <!-- <form action="" method="get" class="flex gap-none" style="margin-right: 16px">
               <?php 
@@ -119,18 +120,18 @@
                 <label for="etat"><b>État</b></label>
                 <select name="etat">
                   <option disabled>Choisir un état...</option>
-                  <option {$isSelectedOption($cars['etat'] == 'Neuve')}>Neuve</option>
-                  <option>Occasion</option>
+                  <option {$isSelectedOption(trim($car['etat']) == 'Neuve')}>Neuve</option>
+                  <option {$isSelectedOption(trim($car['etat']) == 'Occasion')}>Occasion</option>
                 </select>
               </div>
 
               <div class="field">
                 <label for="type_carburant"><b>Type de carburant</b></label>
                 <select name="type_carburant">
-                  <option disabled selected>Choisir un type...</option>
-                  <option>Diesel</option>
-                  <option>Essence</option>
-                  <option>Gasoil</option>
+                  <option disabled>Choisir un type...</option>
+                  <option {$isSelectedOption(trim($car['type_carburant']) == 'Diesel')}>Diesel</option>
+                  <option {$isSelectedOption(trim($car['type_carburant']) == 'Essence')}>Essence</option>
+                  <option {$isSelectedOption(trim($car['type_carburant']) == 'Gasoil')}>Gasoil</option>
                 </select>
                 <!-- <input type="text" name="type_carburant" required> -->
               </div>
@@ -138,9 +139,9 @@
               <div class="field">
                 <label for="statut"><b>Statut</b></label>
                 <select name="statut">
-                  <option disabled selected>Choisir un statut...</option>
-                  <option>Disponible</option>
-                  <option>Acheté</option>
+                  <option disabled>Choisir un statut...</option>
+                  <option {$isSelectedOption(trim($car['statut']) == 'Disponible')}>Disponible</option>
+                  <option {$isSelectedOption(trim($car['statut']) == 'Acheté')}>Acheté</option>
                 </select>
               </div>
             </div>
