@@ -9,6 +9,17 @@
     <!-- <link rel="stylesheet" href="lib/w3-theme-teal.css"/> -->
     <!-- <link rel="stylesheet" href="lib/w3-4.0.css"/> -->
     <link rel="stylesheet" href="css/app.css"/>
+    <?php
+    $pdo = require './controllers/Connect.php';
+    require './controllers/DashboardRepository.php';
+  
+    $repository = new DashboardRepository($pdo);
+
+    $countCars = $repository->getCountCars();
+    $countClients = $repository->getCountClients();
+    $countEmployees = $repository->getCountEmployees();
+    $countVentes = $repository->getCountVentes();
+    ?>
 </head>
 
 <body>
@@ -19,30 +30,32 @@
         <a href="pages/clients">Clients</a>
         <a href="pages/employes">Employés</a>
     </nav>
-
+<?php echo <<<HTML
     <div class="content">
         <div class="flex justify-space-between">
             <div class="stat-card">
                 <h3 class="title">Nombre de voitures</h3>
-                <span class="number">22</span>
+                <span class="number">$countCars</span>
             </div>
 
             <div class="stat-card">
                 <h3 class="title">Nombre de clients</h3>
-                <span class="number">12</span>
+                <span class="number">$countClients</span>
             </div>
 
             <div class="stat-card">
                 <h3 class="title">Nombre d'employés</h3>
-                <span class="number">5</span>
+                <span class="number">$countEmployees</span>
             </div>
 
             <div class="stat-card">
                 <h3 class="title">Nombre de ventes</h3>
-                <span class="number">8</span>
+                <span class="number">$countVentes</span>
             </div>
         </div>
     </div>
+HTML;
+?>
     
 
     <footer></footer>
