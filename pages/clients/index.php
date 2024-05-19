@@ -102,7 +102,7 @@
 
   <script>
     function deleteObject(id) {
-      const isDelete = confirm(`Voulez vous supprimer cette vente ?`);
+      const isDelete = confirm(`Voulez vous supprimer ce(tte) client(e) ?`);
       if (isDelete) {
         document.getElementById(`delete-object-${id}`).submit()
       }

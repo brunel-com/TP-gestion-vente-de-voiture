@@ -4,12 +4,9 @@
 <head>
     <title>Gestion Vente Voitures </title>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script> -->
     <link rel="stylesheet" href="../../lib/fontawesome/css/fontawesome.css" />
     <link rel="stylesheet" href="../../lib/fontawesome/css/regular.css" />
     <link rel="stylesheet" href="../../lib/fontawesome/css/solid.css" />
-    <!-- <link rel="stylesheet" href="lib/w3-theme-teal.css"/> -->
-    <!-- <link rel="stylesheet" href="lib/w3-4.0.css"/> -->
     <link rel="stylesheet" href="../../css/app.css" />
 
     <?php
@@ -40,15 +37,6 @@
     };
 
     $object = $repository->get($_GET['id']);
-    $venteClient = $object['client'];
-    $client3 = $clientName($clients[3]);
-    echo $venteClient . '\n';
-    echo $client3;
-    print_r(str_split($venteClient));
-    print_r(str_split($client3));
-    if( $venteClient == $client3 ) {
-        echo "True";
-    } else { echo "False"; }
 
     if (!isset($_GET['id'])) {
         die('ERREUR - Aucun ID renseigné dans l\'url');
